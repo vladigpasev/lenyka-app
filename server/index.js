@@ -11,7 +11,9 @@ con.connect(function(err) {
   if (err) throw err;
   con.query("SELECT ID, group_name, group_code, group_MSlink, group_nivel, teacher_name, onlpris FROM groups", function (err, result, fields) {
     if (err) throw err;
-    console.log(result);
+    app.get("/api", (req, res) => {
+      res.json(result);
+    });
   });
 });
 
@@ -21,11 +23,6 @@ const express = require("express");
 const PORT = process.env.PORT || 3001;
 
 const app = express();
-
-
-app.get("/api", (req, res) => {
-    res.json(result);
-  });
   
   app.listen(PORT, () => {
     console.log(`Server listening on ${PORT}`);
